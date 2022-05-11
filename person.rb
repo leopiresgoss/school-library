@@ -1,10 +1,7 @@
 require 'time'
-
-class Nameable
-  def correct_name
-    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
-  end
-end
+require_relative 'nameable_decorators/nameable'
+require_relative 'nameable_decorators/base_decorator'
+require_relative 'nameable_decorators/decorators'
 
 class Person < Nameable
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -32,33 +29,6 @@ class Person < Nameable
 
   def of_age?
     @age >= 18
-  end
-end
-
-# base decorator
-class BaseDecorator < Nameable
-  def initialize(nameable)
-    super()
-    @nameable = nameable
-  end
-
-  def correct_name
-    @nameable.correct_name
-  end
-end
-
-# decorators
-class CapitalizeDecorator < BaseDecorator
-  def correct_name
-    super()
-    @nameable.correct_name.capitalize
-  end
-end
-
-class TrimmerDecorator < BaseDecorator
-  def correct_name
-    super()
-    @nameable.correct_name[0, 9]
   end
 end
 
