@@ -4,6 +4,21 @@ require_relative 'classroom'
 require_relative 'student'
 require_relative 'rental'
 require_relative 'book'
+require_relative 'person'
+require_relative 'nameable_decorators/base_decorator'
+require_relative 'nameable_decorators/decorators'
+
+person = Person.new(22, 'maximilianus')
+puts "person: #{person.correct_name}"
+# => person: maximilianus
+
+capitalize_person = CapitalizeDecorator.new(person)
+puts "capitalizedPerson: #{capitalize_person.correct_name}"
+# => capitalizedPerson: Maximilianus
+
+capitalized_trimmed_person = TrimmerDecorator.new(capitalize_person)
+puts "capitalized_trimmed_person: #{capitalized_trimmed_person.correct_name}"
+# => capitalized_trimmed_person: Maximilia
 
 classroom = Classroom.new('MATH-1A')
 puts classroom.label
