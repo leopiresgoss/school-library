@@ -25,7 +25,6 @@ classroom.students.each { |student| puts "#{student.name} - #{student.classroom.
 book1 = Book.new('Percy Jackson & the Olympians', 'Rick Riordan')
 book2 = Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
 
-
 book1.add_rental('2021/05/03', maria)
 jonas.add_rental('2021/12/02', book1)
 maria.add_rental('2021/07/07', book2)
