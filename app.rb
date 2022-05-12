@@ -10,11 +10,9 @@ puts classroom.label
 puts classroom.students
 # =>
 
-maria_student = Student.new(classroom, 16, 'Maria')
-classroom.add_student(maria_student)
+Student.new(classroom, 16, 'Maria')
 
-jonas_student = Student.new(classroom, 15, 'Jonas', parent_permission: false)
-classroom.add_student(jonas_student)
+Student.new(classroom, 15, 'Jonas', parent_permission: false)
 
 classroom.students.each { |student| puts student.name }
 # => Maria, Jonas
