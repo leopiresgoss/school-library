@@ -12,12 +12,15 @@ puts classroom.label
 puts classroom.students
 # =>
 
-maria = Student.new(classroom, 16, 'Maria')
+maria = Student.new(16, 'Maria')
+jonas = Student.new(15, 'Jonas', parent_permission: false)
 
-jonas = Student.new(classroom, 15, 'Jonas', parent_permission: false)
+classroom.add_student(maria)
+classroom.add_student(jonas)
 
-classroom.students.each { |student| puts student.name }
-# => Maria, Jonas
+classroom.students.each { |student| puts "#{student.name} - #{student.classroom.label}" }
+# => Maria - MATH-1A
+# => Jonas - MATH-1A
 
 book1 = Book.new('Percy Jackson & the Olympians', 'Rick Riordan')
 book2 = Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
