@@ -24,7 +24,7 @@ To get a local copy follow these simple example steps.
 `cd school-library`  
 3.- Install the project's dependencies by running this command:   
 `bundle install`   
-4.- In you terminal, run `irb`, following this sequence: copy and paste the person.rb, student.rb, teacher.rb code, then you can check the results  
+4.- In you terminal, run `irb`, following this sequence: copy and paste the app.rb then you can check the results  or you can run `ruby app.rb`
 
 ## Author
 👤 **Leonardo Pires Goss**
