@@ -25,10 +25,11 @@ classroom.students.each { |student| puts "#{student.name} - #{student.classroom.
 book1 = Book.new('Percy Jackson & the Olympians', 'Rick Riordan')
 book2 = Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
 
-Rental.new('2021/05/03', maria, book1)
-Rental.new('2021/12/02', jonas, book1)
-Rental.new('2021/07/07', maria, book2)
-Rental.new('2021/11/12', jonas, book2)
+
+book1.add_rental('2021/05/03', maria)
+jonas.add_rental('2021/12/02', book1)
+maria.add_rental('2021/07/07', book2)
+book2.add_rental('2021/11/12', jonas)
 
 book1.rentals.each { |rental| puts "rental: #{rental.date} - #{rental.book.title} by #{rental.person.name}" }
 # => rental: 2021/05/03 - Percy Jackson & the Olympians by Maria
