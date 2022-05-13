@@ -102,7 +102,7 @@ class App
     specialization = gets.chomp
 
     print 'Age: '
-    age = gets.chomp.to_i
+    age = gets.chomp
 
     if age.zero?
       puts 'Invalid age'
