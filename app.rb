@@ -35,9 +35,8 @@ class App
     option = gets.chomp.to_i
 
     if option == 7
-      puts 'Thanks you for using this app!'
+      puts 'Thank you for using this app!'
     else
-      puts 'test'
       @options_obj[option]&.call
       display_options
     end
@@ -117,10 +116,43 @@ class App
   end
 
   def create_rental
-    true
+    if @books.length.zero? || @people.length.zero?
+      puts 'Books or person not found, add them first before creating a rental'
+      return
+    end
+
+    puts 'Select a book from the following list by number'
+    @books.each_with_index { |book, i| puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}" }
+    index = gets.chomp.to_i
+    book = @books[index]
+
+    puts 'Select a person from the following list by number (not id)'
+    @people.each_with_index do |person, i|
+      puts "#{i}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    index = gets.chomp.to_i
+    person = @people[index]
+
+    print 'Date: '
+    date = gets.chomp
+
+    person.add_rental(date, book)
+    puts 'Rental created successfully'
   end
 
   def list_all_rentals
-    true
+    print 'ID of a person '
+    id = gets.chomp.to_i
+
+    person = @people.find { |p| id == p.id }
+
+    unless person
+      puts 'Person not found'
+      return
+    end
+
+    person.rentals.each do |rental|
+      puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}"
+    end
   end
 end
