@@ -6,9 +6,18 @@ class App
   def initialize
     @options = ['List all books', 'List all people', 'Create a person', 'Create a book',
                 'Create a rental', 'List all rentals for a given person id', 'Exit']
+
     @books = []
-    @students = []
-    @teachers = []
+    @people = []
+
+    @options_obj = {
+      1 => -> { list_all_books },
+      2 => -> { list_all_people },
+      3 => -> { create_person },
+      4 => -> { create_book },
+      5 => -> { create_rental },
+      6 => -> { list_all_rentals }
+    }
   end
 
   def run
@@ -24,25 +33,18 @@ class App
 
   def select_option
     option = gets.chomp.to_i
-    case option
-    when 1
-      list_all_books
-    when 2
-      list_all_people
-    when 3
-      create_person
-    when 4
-      create_book
-    when 7
+
+    if option == 7
       puts 'Thanks you for using this app!'
     else
+      puts 'test'
+      @options_obj[option]&.call
       display_options
     end
   end
 
   def list_all_books
     @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
-    display_options
   end
 
   def create_book
@@ -53,7 +55,6 @@ class App
     book = Book.new(title, author)
     @books << book
     puts 'Book created successfully'
-    display_options
   end
 
   def create_person
@@ -61,20 +62,19 @@ class App
     input = gets.chomp.to_i
     case input
     when 1
-      @students << add_student
+      @people << add_student
     when 2
-      @teachers << add_teacher
+      @people << add_teacher
     else
       create_person
     end
     puts 'Person created successfully!'
-    display_options
   end
 
   def list_all_people
-    @students.each { |student| puts "[Student] Name: #{student.name}, ID: #{student.id}, Age: #{student.age}" }
-    @teachers.each { |teacher| puts "[Teacher] Name: #{teacher.name}, ID: #{teacher.id}, Age: #{teacher.age}" }
-    display_options
+    @people.each do |person|
+      puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
   end
 
   def add_student
@@ -105,9 +105,22 @@ class App
     print 'Age: '
     age = gets.chomp.to_i
 
+    if age.zero?
+      puts 'Invalid age'
+      add_teacher
+    end
+
     print 'Name: '
     name = gets.chomp
 
     Teacher.new(specialization, age, name)
+  end
+
+  def create_rental
+    true
+  end
+
+  def list_all_rentals
+    true
   end
 end
