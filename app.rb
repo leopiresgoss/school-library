@@ -121,23 +121,35 @@ class App
       return
     end
 
-    puts 'Select a book from the following list by number'
-    @books.each_with_index { |book, i| puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}" }
-    index = gets.chomp.to_i
-    book = @books[index]
+    book = select_book
+    person = select_person
 
-    puts 'Select a person from the following list by number (not id)'
-    @people.each_with_index do |person, i|
-      puts "#{i}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    unless person && book
+      puts 'Invalid value for book or person, try again'
+      return
     end
-    index = gets.chomp.to_i
-    person = @people[index]
 
     print 'Date: '
     date = gets.chomp
 
     person.add_rental(date, book)
     puts 'Rental created successfully'
+  end
+
+  def select_book
+    puts 'Select a book from the following list by number'
+    @books.each_with_index { |book, i| puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}" }
+    index = gets.chomp.to_i
+    @books[index]
+  end
+
+  def select_person
+    puts 'Select a person from the following list by number (not id)'
+    @people.each_with_index do |person, i|
+      puts "#{i}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    index = gets.chomp.to_i
+    @people[index]
   end
 
   def list_all_rentals
