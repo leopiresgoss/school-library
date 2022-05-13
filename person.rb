@@ -1,7 +1,6 @@
 require 'time'
 require_relative 'nameable_decorators/nameable'
-require_relative 'nameable_decorators/base_decorator'
-require_relative 'nameable_decorators/decorators'
+require_relative 'rental'
 
 class Person < Nameable
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -36,15 +35,3 @@ class Person < Nameable
     @age >= 18
   end
 end
-
-person = Person.new(22, 'maximilianus')
-puts "person: #{person.correct_name}"
-# => person: maximilianus
-
-capitalize_person = CapitalizeDecorator.new(person)
-puts "capitalizedPerson: #{capitalize_person.correct_name}"
-# => capitalizedPerson: Maximilianus
-
-capitalized_trimmed_person = TrimmerDecorator.new(capitalize_person)
-puts "capitalized_trimmed_person: #{capitalized_trimmed_person.correct_name}"
-# => capitalized_trimmed_person: Maximilia
